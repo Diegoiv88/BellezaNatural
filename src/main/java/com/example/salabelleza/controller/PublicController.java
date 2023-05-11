@@ -250,7 +250,7 @@ public class PublicController
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
         helper.setTo(usuario.getEmail());
         helper.setSubject("Detalles de la compra");
-        helper.setText("Gracias por su compra. Aquí están los detalles de su compra.");
+        helper.setText("Gracias por su compra. Aquí están los detalles de su compra.", true);
         helper.addAttachment("Factura.pdf", new ByteArrayResource(outputStream.toByteArray()));
 
         mailSender.send(message);

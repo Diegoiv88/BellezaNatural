@@ -28,7 +28,7 @@
                 <td th:text="${servicio.duracion}"></td>
                 <td class="d-flex gap-2">
                     <a th:href="@{/servicios/editar/{id} (id = ${servicio.id})}" class="btn btn-warning">Editar</a>
-                    <a th:href="@{/servicios/eliminar/{id} (id = ${servicio.id})}" class="btn btn-danger" id="btn-delete-product">Inhabilitar</a>
+                    <a th:href="@{/servicios/eliminar/{id} (id = ${servicio.id})}" class="btn btn-danger" id="btn-delete-product">Eliminar</a>
                 </td>
             </tr>
             </tbody>

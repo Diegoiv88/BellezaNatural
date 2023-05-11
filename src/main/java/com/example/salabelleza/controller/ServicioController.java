@@ -4,12 +4,14 @@ import com.example.salabelleza.model.Producto;
 import com.example.salabelleza.model.Servicio;
 import com.example.salabelleza.model.Usuario;
 import com.example.salabelleza.model.Valoracion;
+import com.example.salabelleza.repository.ServicioRepository;
 import com.example.salabelleza.service.IServicioService;
 import com.example.salabelleza.service.IUsuarioService;
 import com.example.salabelleza.service.ImageService;
 import com.example.salabelleza.service.RatingForm;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -26,6 +28,9 @@ import java.util.Optional;
 @Controller
 @RequestMapping("/servicios")
 public class ServicioController {
+
+    @Autowired
+    private ServicioRepository servicioRepository;
     @Autowired
     private IUsuarioService usuarioService;
 
@@ -136,6 +141,9 @@ public class ServicioController {
 
         return "redirect:/servicios";
     }
+
+
+
 
     // Eliminar un servicio
     @GetMapping("/eliminar/{id}")

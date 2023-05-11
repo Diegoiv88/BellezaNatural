@@ -29,6 +29,6 @@ public class Servicio {
     @ManyToOne
     private Usuario usuario;
 
-
+    private boolean habilitado = true;
 
 }

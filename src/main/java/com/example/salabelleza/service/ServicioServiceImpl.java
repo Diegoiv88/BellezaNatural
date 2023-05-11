@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class ServicioServiceImpl implements IServicioService{
+public class ServicioServiceImpl implements IServicioService {
 
     @Autowired
     private ServicioRepository servicioRepository;
@@ -56,8 +56,12 @@ public class ServicioServiceImpl implements IServicioService{
         return null;
     }
 
-//    @Override
+    //    @Override
 //    public void saveValoracion(Valoracion valoracion) {
 //
 //    }
+    public Servicio buscarPorId(Integer id) {
+        Optional<Servicio> optionalServicio = servicioRepository.findById(id);
+        return optionalServicio.orElse(null);
+    }
 }

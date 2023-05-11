@@ -20,6 +20,8 @@ public interface IServicioService {
 
     Servicio getServicioById(Integer servicioId);
 
+    Servicio buscarPorId(Integer servicioId);
+
 //    void saveValoracion(Valoracion valoracion);
 }
 
