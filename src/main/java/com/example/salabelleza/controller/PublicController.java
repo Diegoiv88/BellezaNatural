@@ -208,8 +208,8 @@ public class PublicController
     }
 
 
-
     @PostMapping("/guardar-orden")
+    // Agregamos la anotación @Transactional para asegurar que las actualizaciones en la base de datos se realicen en una transacción
     public String saveOrder(Model model, HttpSession session) throws MessagingException, IOException, DocumentException {
         // Obtener el usuario y el carrito de compras
         int userId = Integer.parseInt(session.getAttribute("usuario.id").toString());
@@ -236,6 +236,17 @@ public class PublicController
 
             total += compra.getPrecio();
             compraService.save(compra);
+
+            Producto producto = item.getProducto();
+            int cantidadComprada = item.getCantidad();
+            int cantidadDisponible = producto.getCantidad();
+            if (cantidadDisponible >= cantidadComprada) {
+                producto.setCantidad(cantidadDisponible - cantidadComprada);
+                productoService.save(producto);
+            } else {
+                // Manejar la situación en que la cantidad disponible es menor que la cantidad comprada
+                throw new RuntimeException("No hay suficiente cantidad disponible para " + producto.getNombre());
+            }
 
             carritoService.delete(item);
 
