@@ -1,0 +1,210 @@
+<div th:include="layout::header"> </div>
+ 
+<!-- content -->
+
+    <div class="my-4 p-5 bg-light rounded-3 container  text-center">
+        <h1 class="display-4">Bienvenidos a nuestro Salón de Belleza</h1>
+        <p class="lead">En nuestro salón de belleza, nos esforzamos por proporcionarle una experiencia de belleza y relajación inolvidable. Ofrecemos una amplia variedad de servicios de belleza, desde cortes y peinados hasta manicuras y pedicuras. Nuestro equipo de profesionales altamente capacitados y amables lo ayudará a sentirse como en casa y lo dejará sintiéndose renovado y rejuvenecido.</p>
+        <a href="#" class="cta-button">Agenda una cita</a>
+    </div>
+<!--<section class="hero-image">-->
+<!--    <h1>Servicios de belleza a tu alcance</h1>-->
+<!--    <p>Te ofrecemos una amplia variedad de servicios de belleza para que te sientas radiante. Ven y conócenos.</p>-->
+<!--    <a href="#" class="cta-button">Agenda una cita</a>-->
+<!--</section>-->
+<section class="container" >
+    <!-- Sin productos -->
+    <div th:if="${productos.isEmpty()}">
+        <h2 th:if="${busqueda != null}" class="text-center my-4">
+            No hay resultados para la búsqueda '<span th:text="${busqueda}"></span>'<br>
+            Intenta con otro término.
+        </h2>
+        <h2 th:unless="${busqueda != null}" class="text-center my-4">
+            Aún no hay productos creados.
+        </h2>
+    </div>
+</section>
+
+    <!-- Con servicios -->
+
+
+    <div id="servicios" class="jumbotron jumbotron-fluid bg-jumbotron" style="margin-bottom: 90px;">
+        <div class="container text-center py-5 px-4">
+            <h3 class="text-white display-3 mb-4">Servicios</h3>
+            <div class="d-inline-flex align-items-center text-white">
+                <p class="m-0"><a class="text-white" href="">Inicio</a></p>
+                <i class="far fa-circle px-3"></i>
+                <a class="dropdown-item" href="#productos">Productos</a>
+            </div>
+        </div>
+    </div>
+<section class="container" >
+    <div th:unless="${servicios.isEmpty()}" class="products my-4">
+
+        <div th:each="servicio: ${servicios}" class="product border rounded">
+            <!-- -->
+            <a class="h-100 text-decoration-none text-black" th:href="@{/servicio/{id} (id = ${servicio.id})}">
+                <div class="p-2 border-bottom product-img-container">
+                    <img th:src="@{/images/{img} (img = ${servicio.imagen})}" class="product-img" alt="servicio">
+                </div>
+
+                <div class="p-2">
+<!--                    <h4 class="">$ <span th:text="${#numbers.formatDecimal(producto.precio, 0, 'DEFAULT', 0, 'POINT')}"></span></h4>-->
+
+                    <p th:text="${servicio.nombre}" class="m-0 text-muted product-title"></p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<!--        <div th:each="servicio: ${servicios}" class="product border rounded">-->
+<!--            &lt;!&ndash; &ndash;&gt;-->
+<!--            <a class="h-100 text-decoration-none text-black" >-->
+<!--                <div class="p-2 border-bottom product-img-container">-->
+<!--                    <img th:src="@{/images/{img} (img = ${servicio.imagen})}" class="product-img" alt="servicio">-->
+<!--                </div>-->
+
+<!--                <div class="p-2">-->
+<!--                    <h4 class="">$ <span th:text="${servicio.duracion}"></span></h4>-->
+
+<!--                    <p th:text="${servicio.nombre}" class="m-0 text-muted product-title"></p>-->
+<!--                </div>-->
+<!--            </a>-->
+<!--        </div>-->
+
+    </div>
+
+
+
+
+
+<!-- Header Start -->
+<div id="productos" class="jumbotron jumbotron-fluid bg-jumbotron" style="margin-bottom: 90px;">
+    <div class="container text-center py-5 px-4">
+        <h3 class="text-white display-3 mb-4">Productos</h3>
+        <div class="d-inline-flex align-items-center text-white">
+            <p class="m-0"><a class="text-white" href="">Inicio</a></p>
+            <i class="far fa-circle px-3"></i>
+            <a class="dropdown-item" href="#servicios">Servicios</a>
+        </div>
+    </div>
+</div>
+
+<section class="container" >
+    <!-- Sin productos -->
+    <div th:if="${productos.isEmpty()}">
+        <h2 th:if="${busqueda != null}" class="text-center my-4">
+            No hay resultados para la búsqueda '<span th:text="${busqueda}"></span>'<br>
+            Intenta con otro término.
+        </h2>
+        <h2 th:unless="${busqueda != null}" class="text-center my-4">
+            Aún no hay productos creados.
+        </h2>
+    </div>
+
+    <!-- Con productos -->
+    <div th:unless="${productos.isEmpty()}" class="products my-4">
+
+        <div th:each="producto: ${productos}" class="product border rounded">
+            <!-- -->
+            <a class="h-100 text-decoration-none text-black" th:href="@{/producto/{id} (id = ${producto.id})}">
+                <div class="p-2 border-bottom product-img-container">
+                    <img th:src="@{/images/{img} (img = ${producto.imagen})}" class="product-img" alt="producto">
+                </div>
+
+                <div class="p-2">
+                    <h4 class="">$ <span th:text="${#numbers.formatDecimal(producto.precio, 0, 'DEFAULT', 0, 'POINT')}"></span></h4>
+
+                    <p th:text="${producto.nombre}" class="m-0 text-muted product-title"></p>
+                </div>
+            </a>
+        </div>
+
+    </div>
+</section>
+
+<div id="AcercaDe" class="mt-5 p-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="media flex-column flex-md-row">
+                <div class="img-container mr-md-3 mb-3 mb-md-0 col-md-4">
+                    <img src="images/bellezaN.jpg" class="img-fluid align-self-center" alt="">
+                </div>
+                <div class="media-body mt-md-5 col-md-8">
+                    <h2 class="text-center mb-4">Acerca de nosotros</h2>
+                    <p class="lead text-justify">Somos una sala de belleza que se dedica a brindar servicios de belleza de alta calidad. Ofrecemos tratamientos faciales, corporales, de cabello y uñas, así como productos de belleza para el cuidado personal.</p>
+                    <p class="lead text-justify">Desde nuestro fundación en 2019, nos hemos enfocado en mantenernos actualizados en las últimas tendencias y tecnologías en la industria de la belleza.</p>
+                    <p class="lead text-justify">Nuestro objetivo es proporcionarte un ambiente relajante y agradable donde puedas disfrutar de un momento para ti. Ofrecemos servicios de calidad y productos de belleza a precios asequibles. ¡Gracias por visitarnos!</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- content/ -->
+
+<div id="contacto" class="jumbotron jumbotron-fluid bg-jumbotron" style="margin-bottom: 90px;">
+    <div class="container text-center py-5 px-4">
+        <h3 class="text-white display-3 mb-4">Contacto</h3>
+        <div class="d-inline-flex align-items-center text-white">
+            <p class="m-0"><a class="text-white" href="">Home</a></p>
+            <i class="far fa-circle px-3"></i>
+
+        </div>
+    </div>
+</div>
+
+<!-- Contact Start -->
+<div  class="container-fluid py-5">
+    <div class="container py-5">
+        <div class="row">
+            <div class="col-lg-6" style="min-height: 500px;">
+                <div class="position-relative h-100">
+                    <iframe class="position-absolute" width="600" height="450" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1980.4892228514177!2d-73.37058892068882!3d5.538166266890758!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e5c734d5f5e5dc5%3A0x9f5bf5b1ed3bbec3!2sTunja%2C%20Boyac%C3%A1%2C%20Colombia!5e0!3m2!1sen!2sus!4v1619378429495!5m2!1sen!2sus" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                </div>
+            </div>
+            <div class="col-lg-6 pt-5 pb-lg-5">
+                <div class="contact-form bg-light p-4 p-lg-5 my-lg-5">
+                    <h6 class="d-inline-block text-white text-uppercase bg-primary py-1 px-2">Contact</h6>
+                    <h1 class="mb-4">Contact For Any Query</h1>
+                    <div id="success"></div>
+                    <form name="sentMessage" id="contactForm" novalidate="novalidate">
+                        <div class="form-row">
+                            <div class="col-sm-6 control-group">
+                                <input type="text" class="form-control border-0 p-4" id="name" placeholder="Your Name"
+                                       required="required" data-validation-required-message="Please enter your name" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                            <div class="col-sm-6 control-group">
+                                <input type="email" class="form-control border-0 p-4" id="email" placeholder="Your Email"
+                                       required="required" data-validation-required-message="Please enter your email" />
+                                <p class="help-block text-danger"></p>
+                            </div>
+                        </div>
+                        <div class="control-group">
+                            <input type="text" class="form-control border-0 p-4" id="subject" placeholder="Subject"
+                                   required="required" data-validation-required-message="Please enter a subject" />
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div class="control-group">
+                                <textarea class="form-control border-0 py-3 px-4" rows="3" id="message" placeholder="Message"
+                                          required="required"
+                                          data-validation-required-message="Please enter your message"></textarea>
+                            <p class="help-block text-danger"></p>
+                        </div>
+                        <div>
+                            <button class="btn btn-primary py-3 px-4" type="submit" id="sendMessageButton">Send
+                                Message</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</main>
+<!-- Contact End -->
+
+
+<div th:include="layout::footer"> </div>

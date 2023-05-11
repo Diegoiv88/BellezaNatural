@@ -1,0 +1,40 @@
+<div th:include="layout::header"> </div>
+
+<!-- content -->
+<main class="container">
+    <h3 class="mt-4">Servicios</h3>
+
+    <a th:href="@{/servicios/crear}" class="btn btn-primary mt-3">Crear servicio</a>
+
+    <div th:if="${servicios.isEmpty()}">
+        <p class="text-center my-3">Aún no hay servicios creados</p>
+    </div>
+    <div th:unless="${servicios.isEmpty()}">
+        <h2 class="mt-4">Servicios</h2>
+
+        <table class="table" id="products-table">
+            <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Descripción</th>
+                <th>duracion</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="servicio: ${servicios}">
+                <td th:text="${servicio.nombre}"></td>
+                <td th:text="${#strings.abbreviate(servicio.descripcion, 64)}"></td>
+                <td th:text="${servicio.duracion}"></td>
+                <td class="d-flex gap-2">
+                    <a th:href="@{/servicios/editar/{id} (id = ${servicio.id})}" class="btn btn-warning">Editar</a>
+                    <a th:href="@{/servicios/eliminar/{id} (id = ${servicio.id})}" class="btn btn-danger" id="btn-delete-product">Inhabilitar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<!-- content/ -->
+
+<div th:include="layout::footer"> </div>

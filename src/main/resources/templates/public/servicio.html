@@ -1,0 +1,45 @@
+<div th:include="layout::header"></div>
+
+<!-- content -->
+<main class="container">
+  <div class="card my-4">
+    <div class="card-body">
+      <div class="row">
+        <div class="col-lg-6 text-center">
+          <img th:src="@{/images/{img} (img = ${servicio.imagen})}" alt="producto" class="w-100"
+               style="max-width: 30rem;">
+        </div>
+
+        <div class="col-lg-6">
+          <h2 class="card-title" th:text="${servicio.nombre}"></h2>
+
+
+            <input type="hidden" name="id" th:value="${servicio.id}">
+
+            <ul class="list-group">
+              <li class="list-group-item">
+<!--                <p class="m-0 fs-3"-->
+<!--                   th:text="{"></p>-->
+              </li>
+
+              <li class="list-group-item">
+                <p th:text="${servicio.descripcion}" class="text-pre-line"></p>
+              </li>
+
+
+            </ul>
+
+
+            <a th:href="@{/citas}" type="button" class="btn btn-primary w-100 mt-4">Agenda cita</a>
+
+        </div>
+
+      </div>
+
+
+    </div>
+  </div>
+</main>
+
+
+<div th:include="layout::footer"></div>

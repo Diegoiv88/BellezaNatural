@@ -1,0 +1,181 @@
+<div th:include="layout::header"></div>
+
+<!-- -->
+<main class="container">
+    <!--    <h1>Agendar cita</h1>-->
+    <!--    <form method="post" action="/citas/guardarCita">-->
+    <!--        <div class="form-group">-->
+    <!--            <label for="servicio">Servicio</label>-->
+    <!--            <<select class="form-control" name="servicio" id="servicio">-->
+    <!--            <option value="">Seleccione un servicio</option>-->
+    <!--            &lt;!&ndash; Agrega un option por cada servicio &ndash;&gt;-->
+    <!--            <th:block th:each="servicio : ${servicios}">-->
+    <!--                <option th:value="${servicio.id}" th:text="${servicio.nombre}"></option>-->
+    <!--            </th:block>-->
+    <!--        </select>-->
+    <!--        </div>-->
+    <!--        <div class="form-group">-->
+    <!--            <label for="fecha">Fecha:</label>-->
+    <!--            <input type="date" id="fecha" name="fecha" class="form-control" required>-->
+    <!--        </div>-->
+    <!--        <div class="form-group">-->
+    <!--            <label for="hora">Hora:</label>-->
+    <!--            <input type="time" id="hora" name="hora" class="form-control" required>-->
+    <!--        </div>-->
+    <!--        <button type="submit" class="btn btn-primary">Agendar cita</button>-->
+    <!--    </form>-->
+
+
+    <!-- Appointment Start -->
+    <div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="row mx-0 justify-content-center text-center">
+
+            </div>
+            <div class="row justify-content-center bg-appointment mx-0">
+                <div class="col-lg-6 py-5">
+                    <div class="p-5 my-5 bg-light">
+                        <h1 class=" text-white text-center mb-4">Agenda tu cita</h1>
+                        <form method="post" action="/citas/guardarCita">
+                            <div class="form-row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="fecha">Fecha:</label>
+                                        <input type="date" id="fecha" name="fecha"
+                                               class="form-control bg-transparent p-4 datetimepicker-input"
+                                               placeholder="Select Date" min="">
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="hora">Hora:</label>
+                                        <input type="time" id="hora" name="hora"
+                                               class="form-control bg-transparent p-4 datetimepicker-input"
+                                               placeholder="Select Time" data-target="#time"/>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="col-sm-6">
+                                    <div class="form-group">
+                                        <label for="servicio">Servicio</label>
+                                        <select class="custom-select bg-transparent px-4" style="height: 47px;"
+                                                name="servicio" id="servicio">
+                                            <option value="">Seleccione un servicio</option>
+                                            <th:block th:each="servicio : ${servicios}">
+                                                <option th:value="${servicio.id}" th:text="${servicio.nombre}"></option>
+                                            </th:block>
+                                        </select>
+
+                                    </div>
+
+                                </div>
+                                <div class="col-sm-6">
+                                    <label style="height: 24px; opacity: 0;"></label>
+                                    <button class="btn btn-primary btn-block" type="submit" style="height: 47px;">
+                                        Agendar cita
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Appointment End -->
+    <h2>Mis citas</h2>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead>
+            <tr>
+                <th>Fecha</th>
+                <th>Hora</th>
+                <th>Servicio</th>
+                <th>Estado</th>
+            </tr>
+            </thead>
+            <tbody>
+            <th:block th:each="cita : ${citas}">
+                <tr th:class="${cita.estado == 'PENDIENTE' ? 'table-warning' : cita.estado == 'CONFIRMADA' ? 'table-success' : ''}">
+                    <td th:text="${cita.fecha}"></td>
+                    <td th:text="${cita.hora}"></td>
+                    <td th:text="${cita.servicio.nombre}"></td>
+                    <td th:text="${cita.estado}"></td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+</main>
+<!-- content/ -->
+
+<footer class="bg-dark text-white py-4">
+    <div class="container">
+        <p class="m-0 text-center">Copyright &COPY; </p>
+    </div>
+</footer>
+<!-- JavaScript Libraries -->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
+<script src="lib/easing/easing.min.js"></script>
+<script src="lib/waypoints/waypoints.min.js"></script>
+<script src="lib/counterup/counterup.min.js"></script>
+<script src="lib/owlcarousel/owl.carousel.min.js"></script>
+<script src="lib/tempusdominus/js/moment.min.js"></script>
+<script src="lib/tempusdominus/js/moment-timezone.min.js"></script>
+<script src="lib/tempusdominus/js/tempusdominus-bootstrap-4.min.js"></script>
+
+<!-- Contact Javascript File -->
+<script src="mail/jqBootstrapValidation.min.js"></script>
+<script src="mail/contact.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+        crossorigin="anonymous"></script>
+<script src="/app.js"></script>
+
+<script>
+    // Obtener el elemento de entrada de hora del formulario
+    var horaInput = document.getElementById("hora");
+
+    // Agregar un evento de cambio para validar la hora seleccionada por el usuario
+    horaInput.addEventListener("change", function() {
+        // Convertir la hora seleccionada a un objeto de fecha
+        var horaSeleccionada = new Date("2000-01-01T" + this.value + ":00");
+
+        // Definir la hora de apertura y cierre de la cita
+        var horaApertura = new Date("2000-01-01T07:00:00");
+        var horaCierre = new Date("2000-01-01T17:00:00");
+
+        // Validar que la hora seleccionada esté dentro del rango permitido
+        if (horaSeleccionada < horaApertura || horaSeleccionada > horaCierre) {
+          alert("La hora seleccionada no está disponible.\nPor favor seleccione una hora entre las 7 AM y las 5 PM.");
+          this.value = "";
+}
+    });
+    // Lista de días festivos en Colombia
+  const festivosColombia = [
+    "2024-01-01", // Año Nuevo
+    "2023-01-10", // Día de los Reyes Magos
+    // Agrega más días festivos aquí...
+  ];
+
+  // Obtener el elemento input y establecer la fecha mínima como el día actual
+  const fechaInput = document.getElementById("fecha");
+  const fechaActual = new Date().toISOString().split("T")[0];
+  fechaInput.setAttribute("min", fechaActual);
+
+  // Agregar un evento al elemento input para verificar si la fecha seleccionada es un día festivo en Colombia
+  fechaInput.addEventListener("change", function() {
+    const fechaSeleccionada = this.value;
+    if (festivosColombia.includes(fechaSeleccionada)) {
+      alert("No puedes seleccionar un día festivo");
+      this.value = "";
+    }
+  });
+
+
+</script>
+</body>
+</html>

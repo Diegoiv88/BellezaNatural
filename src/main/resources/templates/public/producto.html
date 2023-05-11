@@ -1,0 +1,107 @@
+<div th:include="layout::header"></div>
+
+<!-- content -->
+<main class="container">
+    <div class="card my-4">
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-6 text-center">
+                    <img th:src="@{/images/{img} (img = ${producto.imagen})}" alt="producto" class="w-100"
+                         style="max-width: 30rem;">
+                </div>
+
+                <div class="col-lg-6">
+                    <h2 class="card-title" th:text="${producto.nombre}"></h2>
+
+                    <form th:action="@{/carrito}" method="POST">
+                        <input type="hidden" name="id" th:value="${producto.id}">
+
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <p class="m-0 fs-3"
+                                   th:text="'$ ' + ${#numbers.formatDecimal(producto.precio, 0, 'DEFAULT', 0, 'POINT')}"></p>
+                            </li>
+
+                            <li class="list-group-item">
+                                <p th:text="${producto.descripcion}" class="text-pre-line"></p>
+                            </li>
+
+                            <li class="list-group-item">
+                                <label for="cantidad" class="form-label">Cantidad</label>
+                                <input type="number" class="form-control" id="cantidad" name="cantidad" min="1"
+                                       value="1">
+                            </li>
+                        </ul>
+
+                        <button type="submit" class="btn btn-primary w-100 mt-4">Añadir al carrito</button>
+                    </form>
+                </div>
+
+            </div>
+            <hr>
+            <div class="card">
+                <div class="card-header">
+                    Valoración del producto
+                </div>
+                <div class="card-body">
+                    <div class="valoraciones">
+                        <h4>Valoraciones existentes:</h4>
+                        <hr>
+                        <ul class="list-unstyled">
+                            <th:block th:each="valoracion : ${producto.valoraciones}">
+                                <li>
+                                    <div class="valoracion-item">
+                                        <div class="rating-stars">
+                                            <span class="rating"
+                                                  style="background-position: 0 -[[${valoracion.stars * 16}]]px"></span>
+                                        </div>
+                                        <div class="valoracion-text">
+                                            <p><b>Valoración:</b> <span
+                                                    class="rating-number">[[${valoracion.stars}]]</span> de 5 estrellas
+                                            </p>
+                                            <p><b>Comentario:</b> <span class="comment-text"
+                                                                        th:text="${valoracion.comment}"></span></p>
+                                        </div>
+                                    </div>
+                                    <hr>
+                                </li>
+                            </th:block>
+                        </ul>
+
+                    </div>
+                    <hr>
+                    <h4>Agregar valoración:</h4>
+                    <form action="#" th:action="@{/productos/{id}/rate}" th:object="${ratingForm}" method="post">
+                        <div class="form-group">
+                            <label for="rating">Selecciona una valoración:</label>
+                            <div class="rating">
+                                <p class="clasificacion">
+                                    <input id="radio1" type="radio" name="stars" value="5">
+                                    <label for="radio1">★</label>
+                                    <input id="radio2" type="radio" name="stars" value="4">
+                                    <label for="radio2">★</label>
+                                    <input id="radio3" type="radio" name="stars" value="3">
+                                    <label for="radio3">★</label>
+                                    <input id="radio4" type="radio" name="stars" value="2">
+                                    <label for="radio4">★</label>
+                                    <input id="radio5" type="radio" name="stars" value="1">
+                                    <label for="radio5">★</label>
+                                </p>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="comment">Comentario:</label>
+                            <textarea class="form-control" name="comment" id="comment" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar valoración</button>
+                    </form>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</main>
+
+
+<div th:include="layout::footer"></div>

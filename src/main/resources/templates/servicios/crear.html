@@ -1,0 +1,44 @@
+<div th:include="layout::header"> </div>
+
+<!-- content -->
+<main class="container">
+    <h1 class="my-4">Crear Servicios</h1>
+    <p class="mt-4 text-muted">* Todos los campos son obligatorios</p>
+
+    <form th:action="@{/servicios/crear}" th:object="${servicio}" method="POST" enctype="multipart/form-data">
+        <div class="mb-3">
+            <label class="form-label" for="nombre">Nombre</label>
+            <input class="form-control" id="nombre" th:field="*{nombre}" type="text" placeholder="Nombre del servicio" required>
+            <small class="form-text text-danger" th:errors="*{nombre}"></small>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="descripcion">Descripción</label>
+            <textarea class="form-control" id="descripcion" th:field="*{descripcion}" rows="5" required></textarea>
+            <small class="form-text text-danger" th:errors="*{descripcion}"></small>
+        </div>
+
+
+
+        <div class="mb-3">
+            <label class="form-label" for="duracion">Duración</label>
+            <div class="input-group">
+                <span class="input-group-text"></span>
+                <input class="form-control" id="duracion" th:field="*{duracion}" type="number" value="1" required>
+            </div>
+            <small class="form-text text-danger" th:errors="*{duracion}"></small>
+        </div>
+
+        <div class="mb-3">
+            <label for="imagen" class="form-label">Imagen</label>
+            <input type="file" class="form-control" id="imagen" name="imagenFile" required>
+            <small th:if="${emptyImage}" class="form-text text-danger">Debes incluir una imagen del servicio</small>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a class="btn btn-outline-secondary" th:href="@{/servicios}">Volver</a>
+    </form>
+</main>
+<!-- content/ -->
+
+<div th:include="layout::footer"> </div>
